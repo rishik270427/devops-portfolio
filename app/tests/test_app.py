@@ -1,7 +1,8 @@
-import app as app_module
+from app.app import app as flask_app
 
 def test_health_route():
-    app = app_module.app.test_client()
-    resp = app.get("/health")
+    client = flask_app.test_client()
+    resp = client.get("/health")
     assert resp.status_code == 200
-    assert resp.json["status"] == "ok"
+    assert resp.get_json()["status"] == "ok"
+
